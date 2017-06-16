@@ -22,13 +22,17 @@ public class BookServiceImpl  implements BookService{
     @Autowired
     private BookRepository bookRepository;
 
-    //将缓存保存进andCache，并使用参数中的bid加上一个字符串(这里使用方法名称)作为缓存的key
+    //将缓存保存进andCache，并使用参数中的bid加上一个字符串(这里使用方法名称)作为缓存的key，缺省按照函数的所有参数组合作为key值
+    //#bid代表参数bid，#p0 代表第一个参数
+    //unless 和condition的区别是，unless是在函数调用后判断，可以对result判断。
+    //cacheManager  制定使用哪个缓存管理器
+    //cacheResolver缓存解析器，创建类实现org.springframework.cache.interceptor.CacheResolver接口
     @Cacheable(value="andCache",key="#bid+'findById'")
     public Book findById(Integer bid) {
         return bookRepository.findById(bid);
     }
 
-    //将缓存保存进andCache，并当参数title的长度大于4时才保存进缓存，默认使用参数值及类型作为缓存的key
+    //将缓存保存进andCache，并当参数title的长度大于4时才保存进缓存，
     @Cacheable(value="andCache",condition="#title.length() > 4")
     public Book findByTitle(String title){
         return bookRepository.findByTitle(title);

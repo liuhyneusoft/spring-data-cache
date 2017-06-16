@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -21,11 +22,14 @@ public class SpringDataCacheApplicationTests {
 	@Autowired
 	private BookService bookService;
 
+	@Autowired
+	private CacheManager cacheManager;
 
 	@Test
 	public void test1() {
  		//只会打印一次sql，b4从缓存中取。
 		Book b3 = bookService.findById(3);
+		//这这里debug，查看cacheManager，有一个ConcurrentHashMap属性，key是andCache，value还是一个Cache,cache的key是andCache就是上边查询的缓存
 		Book b4 = bookService.findById(3);
 
 		System.err.println(b3);
