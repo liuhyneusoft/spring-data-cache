@@ -1,0 +1,3 @@
+# spring-data-cache
+1.使用spring cache，引入dependency，使用@EnableCaching注解开启缓存功能。注入的CacheManager是ConcurrentHashMapCacheManager
+2.使用ehcache，引入dependency和ehcache.xml，同样使用@Cacheable注解。注入的CacheManager是EhCacheCacheManager
