@@ -54,4 +54,17 @@ public class SpringDataCacheApplicationTests {
 		b2.forEach(x->System.out.println(x));
 	}
 
+
+	@Test
+	public void test4() {
+		//缓存被清理，执行两次sql
+		Book b3 = bookService.findById(3);
+		b3.setTitle("b3Modify");
+		bookService.modifyBook(b3);
+		Book b4 = bookService.findById(3);
+
+		System.err.println(b3);
+		System.err.println(b4);
+	}
+
 }
