@@ -32,6 +32,13 @@ public class BookServiceImpl  implements BookService{
         return bookRepository.findById(bid);
     }
 
+    //在cacheManager中有currentHashMap属性，
+    // 有两个key分别是gege和ancCahce，value分别都是concurrentHashmap，key是这个方法制定的。value是Cache对象
+    @Cacheable(value="gege",key="#bid+'findById'")
+    public Book findByIdGeGe(Integer bid) {
+        return bookRepository.findById(bid);
+    }
+
     //将缓存保存进andCache，并当参数title的长度大于4时才保存进缓存，
     @Cacheable(value="andCache",condition="#title.length() > 4")
     public Book findByTitle(String title){

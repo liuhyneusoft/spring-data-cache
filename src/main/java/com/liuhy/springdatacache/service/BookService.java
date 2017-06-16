@@ -8,6 +8,7 @@ import java.util.List;
 public interface BookService {
 
     public Book findById(Integer bid);
+    public Book findByIdGeGe(Integer bid);
 
     public List<Book> findBookAll();
 

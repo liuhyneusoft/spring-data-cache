@@ -71,4 +71,17 @@ public class SpringDataCacheApplicationTests {
 		System.err.println(b4);
 	}
 
+	@Test
+	public void test5() {
+		//只会打印一次sql，b4从缓存中取。
+		Book b3 = bookService.findByIdGeGe(3);
+		Book cache = (Book)cacheManager.getCache("gege").get("3findById").get();
+		Book b4 = bookService.findByIdGeGe(3);
+
+		System.err.println(b3);
+		System.err.println(b4);
+		System.out.println(cache==b3); //true
+		System.out.println(cache==b4); //true
+	}
+
 }
